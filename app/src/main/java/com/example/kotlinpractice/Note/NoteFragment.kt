@@ -1,4 +1,4 @@
-package com.example.kotlinpractice
+package com.example.kotlinpractice.Note
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
+import com.example.kotlinpractice.R
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -41,7 +42,7 @@ class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
         notesLayout = view.findViewById(R.id.linearLayout_notes)
 
         view.findViewById<Button>(R.id.button_add).setOnClickListener{
-            if(notesLayout.childCount< MAX_NUM_OF_NOTES+1){
+            if(notesLayout.childCount< MAX_NUM_OF_NOTES +1){
                 showAddNoteDialog()
             }
         }

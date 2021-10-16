@@ -1,4 +1,4 @@
-package com.example.kotlinpractice
+package com.example.kotlinpractice.Note
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import java.util.jar.Attributes
+import com.example.kotlinpractice.R
 
 class NoteItem: LinearLayout {
 
