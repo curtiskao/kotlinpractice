@@ -12,6 +12,7 @@ import java.util.jar.Attributes
 
 class NoteItem: LinearLayout {
 
+
     constructor(context: Context) : super(context) {
         Log.d(TAG, "CompassView(context) called")
         View.inflate(context, R.layout.note_item_layout, this)
@@ -27,6 +28,11 @@ class NoteItem: LinearLayout {
     fun setText(text: String){
         val textView: TextView = findViewById(R.id.tv_note_content);
         textView.setText(text);
+    }
+
+    fun getText(): String{
+        val textView: TextView = findViewById(R.id.tv_note_content);
+        return textView.text.toString()
     }
 
     @SuppressLint("WrongViewCast")

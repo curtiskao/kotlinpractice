@@ -40,12 +40,7 @@
                 android:text="Add" />
         </LinearLayout>
 
-        <com.example.kotlinpractice.NoteItem
-            android:id="@+id/noteItem1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
-            />
     </LinearLayout>
 
 
