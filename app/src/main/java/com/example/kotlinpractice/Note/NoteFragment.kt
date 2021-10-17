@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.kotlinpractice.R
 
@@ -20,6 +22,7 @@ class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
     private lateinit var currentNoteItem: NoteItem;
     private lateinit var notesLayout: LinearLayout
     private var noteList = mutableListOf<String>()
+    private lateinit var noteViewModel: NoteViewModel
 
     companion object{
         const val MAX_NUM_OF_NOTES = 7
@@ -47,6 +50,18 @@ class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
             }
         }
 
+        //viewmodel
+        noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        noteViewModel.allWords.observe(viewLifecycleOwner, Observer {
+            words -> words.let { setWords(it as List<Note>) }
+        })
+
+    }
+
+    fun setWords(list: List<Note>){
+        list.forEach{
+            Log.d("item", ": " +it.toString())
+        }
     }
 
     fun showAddNoteDialog(){
