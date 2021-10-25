@@ -24,9 +24,17 @@ class NoteRepo(private val noteDao: NoteDao) {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    val allWords: LiveData<List<Note>> = noteDao.getAlphabetizedWords()
+    val allWords: LiveData<List<Note>> = noteDao.getAllWords()
 
     suspend fun insert(note: Note) {
         noteDao.insert(note)
+    }
+
+    suspend fun deleteAll(){
+        noteDao.deleteAll()
+    }
+
+    suspend fun delete(content: String){
+        noteDao.delete(content)
     }
 }

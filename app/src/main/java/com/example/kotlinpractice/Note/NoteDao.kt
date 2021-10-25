@@ -59,12 +59,15 @@ interface NoteDao {
     // Always holds/caches latest version of data. Notifies its active observers when the
     // data has changed. Since we are getting all the contents of the database,
     // we are notified whenever any of the database contents have changed.
-    @Query("SELECT * from note_table ORDER BY note ASC")
-    fun getAlphabetizedWords(): LiveData<List<Note>>
+    @Query("SELECT * from note_table")
+    fun getAllWords(): LiveData<List<Note>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(note: Note)
 
     @Query("DELETE FROM note_table")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM note_table WHERE note = :content")
+    suspend fun delete(content:String)
 }

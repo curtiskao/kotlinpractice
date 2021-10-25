@@ -14,15 +14,11 @@ class NoteItem: LinearLayout {
 
 
     constructor(context: Context) : super(context) {
-        Log.d(TAG, "CompassView(context) called")
         View.inflate(context, R.layout.note_item_layout, this)
-        Log.d(TAG, "Inflation started from constructor.")
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        Log.d(TAG, "CompassView(context, attrs) called")
         View.inflate(context, R.layout.note_item_layout, this)
-        Log.d(TAG, "Inflation started from constructor.")
     }
 
     fun setText(text: String){

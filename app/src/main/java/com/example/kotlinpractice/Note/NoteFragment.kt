@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -44,11 +45,6 @@ class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
         }
         notesLayout = view.findViewById(R.id.linearLayout_notes)
 
-        view.findViewById<Button>(R.id.button_add).setOnClickListener{
-            if(notesLayout.childCount< MAX_NUM_OF_NOTES +1){
-                showAddNoteDialog()
-            }
-        }
 
         //viewmodel
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
@@ -56,11 +52,30 @@ class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
             words -> words.let { setWords(it as List<Note>) }
         })
 
+        setListeners(view)
+    }
+
+    fun setListeners(view: View){
+        view.findViewById<Button>(R.id.button_add).setOnClickListener{
+            if(notesLayout.childCount< MAX_NUM_OF_NOTES +1){
+                showAddNoteDialog()
+            }
+        }
+        view.findViewById<Button>(R.id.button_deleteAll).setOnClickListener{
+            notesLayout.removeAllViews()
+            noteViewModel.deleteAll()
+        }
+
+        view.findViewById<Button>(R.id.button_db).setOnClickListener{
+            noteViewModel.deleteAll()
+        }
     }
 
     fun setWords(list: List<Note>){
+        Log.d("item size",": " +list.size)
+        notesLayout.removeAllViews()
         list.forEach{
-            Log.d("item", ": " +it.toString())
+            addNoteItem(it.note)
         }
     }
 
@@ -72,16 +87,19 @@ class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
 
     fun addNoteItem(text: String = "next item"){
         val noteItem: NoteItem? = context?.let { NoteItem(it) };
-        notesLayout.addView(noteItem)
         if (noteItem != null) {
+            notesLayout.addView(noteItem)
             noteItem.setText(text)
-            noteItem.getDeleteButton().setOnClickListener{removeView(noteItem)}
+            noteItem.getDeleteButton().setOnClickListener{removeView(noteItem,text)}
+            val newNote = Note(text)
+            noteViewModel.insert(newNote)
         }
 
     }
 
-    fun removeView(view: View){
-        if(notesLayout.childCount > 1){
+    fun removeView(view: View, text: String){
+        if(notesLayout.childCount > 0){
+            noteViewModel.delete(text)
             notesLayout.removeView(view)
         }
     }

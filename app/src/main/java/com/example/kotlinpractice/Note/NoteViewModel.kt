@@ -18,10 +18,12 @@ package com.example.kotlinpractice.Note
 
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * View Model to keep a reference to the word repository and
@@ -52,4 +54,11 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     fun insert(note: Note) = viewModelScope.launch {
         repository.insert(note)
     }
+
+    fun deleteAll() = viewModelScope.launch { repository.deleteAll() }
+
+    fun delete(content:String) = viewModelScope.launch {
+        Log.d("item","deleting: " +content)
+        repository.delete(content) }
+
 }

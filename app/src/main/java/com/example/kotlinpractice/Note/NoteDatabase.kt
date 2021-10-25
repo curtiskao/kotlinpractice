@@ -11,9 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
- * This is the backend. The database. This used to be done by the OpenHelper.
- * The fact that this has very few comments emphasizes its coolness.  In a real
- * app, consider exporting the schema to help you with migrations.
+
  */
 @Database(entities = [Note::class], version = 1, exportSchema = false)
 abstract class NoteDatabase : RoomDatabase() {
@@ -36,7 +34,7 @@ abstract class NoteDatabase : RoomDatabase() {
                     NoteDatabase::class.java,
                     "note_database"
                 )
-                    .addCallback(WordDatabaseCallback(scope))
+                    .addCallback(NoteDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 // return instance
@@ -44,7 +42,7 @@ abstract class NoteDatabase : RoomDatabase() {
             }
         }
 
-        private class WordDatabaseCallback(
+        private class NoteDatabaseCallback(
             private val scope: CoroutineScope
         ) : RoomDatabase.Callback() {
             /**
@@ -57,7 +55,7 @@ abstract class NoteDatabase : RoomDatabase() {
                 // comment out the following line.
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.noteDao())
+                        //populateDatabase(database.noteDao())
                     }
                 }
             }
