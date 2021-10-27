@@ -20,9 +20,7 @@ import com.example.kotlinpractice.R
  */
 class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
 
-    private lateinit var currentNoteItem: NoteItem;
     private lateinit var notesLayout: LinearLayout
-    private var noteList = mutableListOf<String>()
     private lateinit var noteViewModel: NoteViewModel
 
     companion object{
