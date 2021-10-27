@@ -33,7 +33,10 @@ class HomeFragment : Fragment() {
         view.findViewById<Button>(R.id.button_note).setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_NoteFragment)
         }
-
+        view.findViewById<Button>(R.id.button_crypto).setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_to_CryptoFragment)
+        }
+        
 
     }
 

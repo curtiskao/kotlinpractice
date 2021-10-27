@@ -12,7 +12,16 @@
         tools:layout="@layout/fragment_note">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_NoteFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CryptoFragment"
+        android:name="com.example.kotlinpractice.Crypto.CryptoFragment"
+        tools:layout="@layout/fragment_crypto">
+
+        <action
+            android:id="@+id/action_CryptoFragment_toHomeFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
     <fragment
@@ -24,5 +33,8 @@
         <action
             android:id="@+id/action_HomeFragment_to_NoteFragment"
             app:destination="@id/NoteFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_CryptoFragment"
+            app:destination="@id/CryptoFragment" />
     </fragment>
 </navigation>

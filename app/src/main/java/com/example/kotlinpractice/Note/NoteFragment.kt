@@ -8,16 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.kotlinpractice.R
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+
 class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
 
     private lateinit var notesLayout: LinearLayout
@@ -38,7 +35,7 @@ class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<Button>(R.id.button_home).setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_NoteFragment_to_HomeFragment)
         }
         notesLayout = view.findViewById(R.id.linearLayout_notes)
 
