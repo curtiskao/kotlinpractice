@@ -39,20 +39,23 @@ class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.button_first).setOnClickListener {
+        view.findViewById<Button>(R.id.button_home).setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-            updateNoteList()
         }
         notesLayout = view.findViewById(R.id.linearLayout_notes)
 
 
         //viewmodel
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        getNotesFromDB()
+
+        setListeners(view)
+    }
+
+    fun getNotesFromDB(){
         noteViewModel.allWords.observe(viewLifecycleOwner, Observer {
             words -> words.let { setWords(it as List<Note>) }
         })
-
-        setListeners(view)
     }
 
     fun setListeners(view: View){
@@ -63,10 +66,6 @@ class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
         }
         view.findViewById<Button>(R.id.button_deleteAll).setOnClickListener{
             notesLayout.removeAllViews()
-            noteViewModel.deleteAll()
-        }
-
-        view.findViewById<Button>(R.id.button_db).setOnClickListener{
             noteViewModel.deleteAll()
         }
     }
@@ -104,21 +103,17 @@ class NoteFragment : Fragment(), AddNoteDialogFragment.AddNoteDialogListener {
         }
     }
 
-    fun updateNoteList(){
-        noteList.clear()
-        for(i in 0..notesLayout.childCount-1){
-            if(notesLayout.getChildAt(i) is NoteItem){
-                noteList.add((notesLayout.getChildAt(i) as NoteItem).getText())
-            }
-        }
-        Log.d("noteList",noteList.toString())
-    }
 
     override fun onDialogPositiveClick(dialog: DialogFragment, message: String) {
         addNoteItem(message)
     }
 
     override fun onDialogNegativeClick(dialog: DialogFragment) {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getNotesFromDB()
     }
 
 }
