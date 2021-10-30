@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlinpractice.Note.AddNoteDialogFragment
 import com.example.kotlinpractice.Note.NoteViewModel
 import com.example.kotlinpractice.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,10 +35,11 @@ class CryptoFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<Button>(R.id.button_home).setOnClickListener {
             //findNavController().navigate(R.id.action_CryptoFragment_toHomeFragment)
-            setAdapter()
+            showCryptoDetails()
         }
 
         cryptoList = ArrayList<CryptoDataClass>()
+
         //viewmodel
         cryptoViewModel = ViewModelProvider(this).get(CryptoViewModel::class.java)
         cryptoViewModel.getCrypto()!!.observe(viewLifecycleOwner, Observer {
@@ -47,22 +49,33 @@ class CryptoFragment: Fragment() {
         recyclerView = view.findViewById(R.id.recyclerview_crypto)
     }
 
-    private fun addToCryptoList(coinDto: CoinDto){
-        cryptoList.add(coinDto.toCryptoDataClass())
+    private fun addToCryptoList(coinDtoList: List<CoinDto>){
+        coinDtoList.forEach(){
+            val id = it!!.id
+            val isActive = it!!.isActive
+            val name = it!!.name
+            val rank = it!!.rank
+            val symbol = it!!.symbol
+
+            val cryptoDto = CoinDto(id,isActive,false,name,rank,symbol,"")
+            cryptoList.add(cryptoDto.toCryptoDataClass())
+        }
+
+        setAdapter()
     }
 
 
-    fun setAdapter(){
-        val c1 = CryptoDataClass("one","1.0")
-        val c2 = CryptoDataClass("two", "2.0")
-        val list = ArrayList<CryptoDataClass>()
-        list.add(c1)
-        list.add(c2)
-
+    private fun setAdapter(){
         val cryptoAdapter = CryptoAdapter(cryptoList)
 
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recyclerView.adapter = cryptoAdapter
+    }
+
+    //rank, is_new, is_active, type, description,
+    private fun showCryptoDetails(cryptoObject: CryptoDataClass = CryptoDataClass()){
+        val cryptoDetailDialogFragment = CryptoDetailDialogFragment(cryptoObject)
+        cryptoDetailDialogFragment.show(parentFragmentManager, "CryptoDetailDialog")
     }
 
 }

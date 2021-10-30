@@ -7,9 +7,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object CryptoRepository {
-    val coinDtoLiveData = MutableLiveData<CoinDto>()
+    val coinDtoLiveData = MutableLiveData<List<CoinDto>>()
 
-    fun getCryptoData(): MutableLiveData<CoinDto> {
+    fun getCryptoData(): MutableLiveData<List<CoinDto>> {
 
         val call = CryptoRetrofitClient.apiInterface.getCrypto()
 
@@ -31,17 +31,7 @@ object CryptoRepository {
                 }
 
                 val data = response.body()
-                data.forEach(){
-                    val id = it!!.id
-                    val isActive = it!!.isActive
-                    val name = it!!.name
-                    val rank = it!!.rank
-                    val symbol = it!!.symbol
-
-                    val cryptoDto = CoinDto(id,isActive,false,name,rank,symbol,"")
-
-                    coinDtoLiveData.value = cryptoDto
-                }
+                coinDtoLiveData.value = data
 
             }
         })

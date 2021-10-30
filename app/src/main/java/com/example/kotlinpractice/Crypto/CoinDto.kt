@@ -16,5 +16,5 @@ data class CoinDto(
 
 
 fun CoinDto.toCryptoDataClass(): CryptoDataClass{
-    return CryptoDataClass(symbol = symbol, name = name)
+    return CryptoDataClass(id = id, symbol = symbol, name = name)
 }

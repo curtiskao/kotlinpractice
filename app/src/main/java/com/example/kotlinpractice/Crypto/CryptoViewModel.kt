@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 
 class CryptoViewModel: ViewModel(){
 
-    var cryptoLiveData: MutableLiveData<CoinDto>? = null
+    var cryptoLiveData: MutableLiveData<List<CoinDto>>? = null
 
-    fun getCrypto(): LiveData<CoinDto>? {
+    fun getCrypto(): LiveData<List<CoinDto>>? {
         cryptoLiveData = CryptoRepository.getCryptoData()
         return cryptoLiveData
     }

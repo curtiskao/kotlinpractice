@@ -26,7 +26,7 @@ class CryptoAdapter(val cryptoList: ArrayList<CryptoDataClass>): RecyclerView.Ad
         fun bindItems(crypto: CryptoDataClass) {
             itemView.tv_crypto_symbol.text = crypto.symbol
             itemView.tv_crypto_full_name.text = crypto.name
-            itemView.tv_crypto_price.text = crypto.price
+            itemView.tv_crypto_id.text = crypto.id
         }
     }
 
