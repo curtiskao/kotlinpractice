@@ -1,5 +1,3 @@
 package com.example.kotlinpractice.Crypto
 
-data class CryptoDataClass(val name: String = "name", val price: String = "0.0") {
-
-}
+data class CryptoDataClass(val symbol: String = "symbol", val price: String = "0.0", val name: String = "name")

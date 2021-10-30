@@ -1,10 +1,8 @@
 package com.example.kotlinpractice.Crypto
 
-import android.database.DataSetObserver
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinpractice.R
 import kotlinx.android.synthetic.main.crypto_item_layout.view.*
@@ -26,7 +24,8 @@ class CryptoAdapter(val cryptoList: ArrayList<CryptoDataClass>): RecyclerView.Ad
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItems(crypto: CryptoDataClass) {
-            itemView.tv_crypto_name.text = crypto.name
+            itemView.tv_crypto_symbol.text = crypto.symbol
+            itemView.tv_crypto_full_name.text = crypto.name
             itemView.tv_crypto_price.text = crypto.price
         }
     }
