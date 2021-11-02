@@ -8,6 +8,7 @@ import retrofit2.Response
 
 object CryptoRepository {
     val coinDtoLiveData = MutableLiveData<List<CoinDto>>()
+    val coinDetailDtoLiveData = SingleLiveEvent<CoinDetailDto>()
 
     fun getCryptoData(): MutableLiveData<List<CoinDto>> {
 
@@ -37,5 +38,34 @@ object CryptoRepository {
         })
 
         return coinDtoLiveData
+    }
+
+    fun getCryptoDetail(id: String): SingleLiveEvent<CoinDetailDto> {
+        Log.d("rep id",id)
+        val call = CryptoRetrofitClient.apiInterface.getCryptoDetails(id)
+
+        call.enqueue(object: Callback<CoinDetailDto> {
+            override fun onFailure(call: Call<CoinDetailDto>, t: Throwable) {
+                // TODO("Not yet implemented")
+                Log.v("DEBUG : API onfailure", t.message.toString())
+            }
+
+            override fun onResponse(
+                    call: Call<CoinDetailDto>,
+                    response: Response<CoinDetailDto>
+            ) {
+                // TODO("Not yet implemented")
+                if(response.body()!=null){
+                    Log.v("DEBUG : API onsuccess", response.body().toString())
+                }else{
+                    Log.v("DEBUG : API onsuccess", "response body is null")
+                }
+
+                val data = response.body()
+                coinDetailDtoLiveData.value = data
+            }
+        })
+
+        return coinDetailDtoLiveData
     }
 }

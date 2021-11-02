@@ -19,7 +19,7 @@ import com.example.kotlinpractice.Note.NoteViewModel
 import com.example.kotlinpractice.R
 import dagger.hilt.android.AndroidEntryPoint
 
-class CryptoFragment: Fragment() {
+class CryptoFragment: Fragment(), CryptoAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var cryptoViewModel: CryptoViewModel
     private lateinit var cryptoList: ArrayList<CryptoDataClass>
@@ -34,8 +34,7 @@ class CryptoFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<Button>(R.id.button_home).setOnClickListener {
-            //findNavController().navigate(R.id.action_CryptoFragment_toHomeFragment)
-            showCryptoDetails()
+            findNavController().navigate(R.id.action_CryptoFragment_toHomeFragment)
         }
 
         cryptoList = ArrayList<CryptoDataClass>()
@@ -66,16 +65,37 @@ class CryptoFragment: Fragment() {
 
 
     private fun setAdapter(){
-        val cryptoAdapter = CryptoAdapter(cryptoList)
+        val cryptoAdapter = CryptoAdapter(cryptoList,this)
 
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recyclerView.adapter = cryptoAdapter
+
     }
 
-    //rank, is_new, is_active, type, description,
-    private fun showCryptoDetails(cryptoObject: CryptoDataClass = CryptoDataClass()){
-        val cryptoDetailDialogFragment = CryptoDetailDialogFragment(cryptoObject)
-        cryptoDetailDialogFragment.show(parentFragmentManager, "CryptoDetailDialog")
+    override fun onItemClick(id: String) {
+        Log.d("itemclick", "id: " +id)
+        //call api and display crypto details
+        cryptoViewModel.getCryptoDetails(id)!!.observe(viewLifecycleOwner, Observer {
+            showCryptoDetails(it)
+        })
     }
+
+
+    //rank, is_new, is_active, type, description,
+    private fun showCryptoDetails(dto: CoinDetailDto){
+        Log.d("showcrypto details", "id: " +id)
+
+        var cryptoDetailObj: CryptoDataClass = CryptoDataClass()
+        cryptoDetailObj.id = dto.id
+        //showCryptoDetails(CryptoDataClass(id = cryptoDetailObj.id))
+
+
+        val cryptoDetailDialogFragment = CryptoDetailDialogFragment(cryptoDetailObj)
+        if(!cryptoDetailDialogFragment.isVisible){
+            cryptoDetailDialogFragment.show(parentFragmentManager, "CryptoDetailDialog")
+        }
+    }
+
+
 
 }

@@ -1,7 +1,7 @@
 package com.example.kotlinpractice.Crypto
 
 data class CryptoDataClass(
-        val id: String = "id",
+        var id: String = "id",
         val symbol: String = "symbol",
         val name: String = "name",
         val rank: Int = 0,

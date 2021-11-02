@@ -22,7 +22,7 @@ class CryptoDetailDialogFragment(val cryptoObject: CryptoDataClass) : DialogFrag
             val inflater = requireActivity().layoutInflater;
             val dialogView: View = inflater.inflate(R.layout.crypto_detail_dialog, null)
             textView = dialogView.findViewById(R.id.tv_details)
-            textView.text = cryptoObject.description
+            textView.text = cryptoObject.id
             builder.setView(dialogView)
             builder.setNegativeButton("Ok",
                             DialogInterface.OnClickListener { dialog, id ->
