@@ -36,5 +36,19 @@
         <action
             android:id="@+id/action_HomeFragment_to_CryptoFragment"
             app:destination="@id/CryptoFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_MoodFragment"
+            app:destination="@id/MoodFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/MoodFragment"
+        android:name="com.example.kotlinpractice.Mood.MoodFragment"
+        tools:layout="@layout/fragment_mood">
+        <action
+            android:id="@+id/action_MoodFragment_toHomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+
+
 </navigation>
