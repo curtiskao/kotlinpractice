@@ -1,17 +1,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="@color/blue"
+
+    >
 
     <TextView
-        android:id="@+id/tv_details"
+        android:id="@+id/tv_name"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        />
 
-        android:background="@color/blue"
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:hint="Details details details " />
+
+    <TextView
+        android:id="@+id/tv_is_active"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_rank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="16dp"
+        />
+
+
 
 </LinearLayout>

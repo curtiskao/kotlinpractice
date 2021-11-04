@@ -2,11 +2,11 @@ package com.example.kotlinpractice.Crypto
 
 data class CryptoDataClass(
         var id: String = "id",
-        val symbol: String = "symbol",
-        val name: String = "name",
-        val rank: Int = 0,
-        val isNew: Boolean = false,
-        val isActive: Boolean = false,
-        val type: String = "",
-        val description: String = ""
+        var symbol: String = "symbol",
+        var name: String = "name",
+        var rank: Int = 0,
+        var isNew: Boolean = false,
+        var isActive: Boolean = false,
+        var type: String = "",
+        var description: String = ""
 )

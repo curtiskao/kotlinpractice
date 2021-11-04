@@ -73,7 +73,6 @@ class CryptoFragment: Fragment(), CryptoAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(id: String) {
-        Log.d("itemclick", "id: " +id)
         //call api and display crypto details
         cryptoViewModel.getCryptoDetails(id)!!.observe(viewLifecycleOwner, Observer {
             showCryptoDetails(it)
@@ -83,10 +82,14 @@ class CryptoFragment: Fragment(), CryptoAdapter.OnItemClickListener {
 
     //rank, is_new, is_active, type, description,
     private fun showCryptoDetails(dto: CoinDetailDto){
-        Log.d("showcrypto details", "id: " +id)
-
         var cryptoDetailObj: CryptoDataClass = CryptoDataClass()
         cryptoDetailObj.id = dto.id
+        cryptoDetailObj.isActive = dto.isActive
+        cryptoDetailObj.isNew = dto.isNew
+        cryptoDetailObj.name = dto.name
+        cryptoDetailObj.description = dto.description
+        cryptoDetailObj.rank = dto.rank
+        
         //showCryptoDetails(CryptoDataClass(id = cryptoDetailObj.id))
 
 
