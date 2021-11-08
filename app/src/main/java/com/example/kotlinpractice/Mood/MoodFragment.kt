@@ -1,25 +1,27 @@
 package com.example.kotlinpractice.Mood
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.kotlinpractice.Note.NoteViewModel
 import com.example.kotlinpractice.R
-import org.w3c.dom.Text
 import kotlin.random.Random
 
 class MoodFragment: Fragment() {
 
     private var brandsArray: MutableList<String> = ArrayList()
     private var foodArray: MutableList<String> = ArrayList()
+    private var actArray: MutableList<String> = ArrayList()
+
     private lateinit var tv_food: TextView
+    private lateinit var tv_activity: TextView
+    private lateinit var tv_num: TextView
+    private lateinit var tv_color: TextView
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -38,21 +40,14 @@ class MoodFragment: Fragment() {
             refresh()
         }
         tv_food = view.findViewById(R.id.tv_food)
+        tv_activity = view.findViewById(R.id.tv_activity)
+        tv_num = view.findViewById(R.id.tv_number)
+        tv_color = view.findViewById(R.id.tv_color)
 
         loadFood()
-    }
-
-
-    private fun loadData(){
-        brandsArray.add("Nike")
-        brandsArray.add("Vetements")
-        brandsArray.add("Ambush")
-        brandsArray.add("CDG")
-        brandsArray.add("Supreme")
-        brandsArray.add("Palace")
-        brandsArray.add("Needles")
-
-
+        loadActivites()
+        genRandomNum()
+        genRandomColor()
     }
 
     private fun loadFood(){
@@ -83,14 +78,51 @@ class MoodFragment: Fragment() {
         genRandomFood()
     }
 
+    private fun loadActivites(){
+        actArray.add("Stay in")
+        actArray.add("Shopping")
+        actArray.add("Work out")
+        actArray.add("Hang out with friends")
+        actArray.add("Read")
+        actArray.add("FaceTime my baby")
+        actArray.add("Play video games")
+        actArray.add("Watch Youtube")
+        actArray.add("Watch Netflix")
+        actArray.add("Play basketball")
+        actArray.add("Practice golf")
+        actArray.add("Practice coding")
+        actArray.add("Study")
+        actArray.add("Eat")
+
+        genRandomActivity()
+    }
+
     private fun genRandomFood(){
         val size = foodArray.size
-        val randomNum = Random.nextInt(0,size)
+        val randomNum = Random.nextInt(0, size)
         tv_food.text = foodArray.get(randomNum)
+    }
+
+    private fun genRandomActivity(){
+        val size = actArray.size
+        val randomNum = Random.nextInt(0, size)
+        tv_activity.text = actArray.get(randomNum)
+    }
+
+    private fun genRandomNum(){
+        tv_num.text = (Random.nextInt(0, 100)+1).toString()
+    }
+
+    private fun genRandomColor(){
+        val color: Int = Color.argb(255, Random.nextInt(256), Random.nextInt(256), Random.nextInt(256))
+        tv_color.setTextColor(color)
     }
 
     private fun refresh(){
         genRandomFood()
+        genRandomActivity()
+        genRandomNum()
+        genRandomColor()
     }
 
 
