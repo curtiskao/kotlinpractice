@@ -39,6 +39,9 @@ class HomeFragment : Fragment() {
         view.findViewById<Button>(R.id.button_mood).setOnClickListener {
             findNavController().navigate(R.id.action_HomeFragment_to_MoodFragment)
         }
+        view.findViewById<Button>(R.id.button_game).setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_toGameFragment)
+        }
         
 
     }

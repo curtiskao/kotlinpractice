@@ -14,7 +14,6 @@ import kotlin.random.Random
 
 class MoodFragment: Fragment() {
 
-    private var brandsArray: MutableList<String> = ArrayList()
     private var foodArray: MutableList<String> = ArrayList()
     private var actArray: MutableList<String> = ArrayList()
 

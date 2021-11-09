@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_MoodFragment"
             app:destination="@id/MoodFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_toGameFragment"
+            app:destination="@id/GameFragment" />
     </fragment>
 
     <fragment
@@ -47,6 +50,15 @@
         tools:layout="@layout/fragment_mood">
         <action
             android:id="@+id/action_MoodFragment_toHomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/GameFragment"
+        android:name="com.example.kotlinpractice.Game.GameFragment"
+        tools:layout="@layout/fragment_game">
+        <action
+            android:id="@+id/action_GameFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
 
