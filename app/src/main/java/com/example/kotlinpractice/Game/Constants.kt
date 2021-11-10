@@ -10,7 +10,9 @@ val ICONS = listOf(
     R.drawable.lambo,
     R.drawable.lambo,
     R.drawable.rolex,
-    R.drawable.rolex
+    R.drawable.rolex,
+        R.drawable.mclaren,
+        R.drawable.mclaren
 
 )
 

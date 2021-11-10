@@ -29,11 +29,18 @@ class GameAdapter(private val context: Context, private val numPieces: Int, priv
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         private val imageButton: ImageButton = itemView.findViewById(R.id.button_tile)
         fun bind(position: Int){
-            imageButton.setImageResource(if(cardImages.get(position).isFaceUp) cardImages[position].id else R.drawable.ic_launcher_background)
+            imageButton.setImageResource(if(cardImages.get(position).isFaceUp) cardImages[position].id else R.drawable.game_card_background)
             imageButton.setOnClickListener{
-                cardImages[position].isFaceUp = if(cardImages[position].isFaceUp) false else true
-                imageButton.setImageResource(if(cardImages.get(position).isFaceUp) cardImages[position].id else R.drawable.ic_launcher_background)
+                //cardImages[position].isFaceUp = if(cardImages[position].isFaceUp) false else true
+                //imageButton.setImageResource(if(cardImages.get(position).isFaceUp) cardImages[position].id else R.drawable.game_card_background)
                 listener.onCardClick(position)
+            }
+
+            if(cardImages.get(position).isMatched){
+                itemView.visibility = View.INVISIBLE
+            }else{
+                itemView.visibility = View.VISIBLE
+
             }
         }
 
