@@ -1,2 +1,5 @@
 # kotlinpractice
-kotlin practice app
+kotlin practice app that includes the following features: 
+to-do note:
+crypto: moodboard:
+matching game:
